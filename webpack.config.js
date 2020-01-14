@@ -27,6 +27,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Hacker news',
+      inject: false,
       template: require('html-webpack-template'),
       appMountId: 'app',
       appMountTag: 'section'
