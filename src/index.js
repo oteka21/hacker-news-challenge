@@ -6,7 +6,7 @@ import { Provider as ThemeProvider } from './Context/Theme.js'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './css/index.css'
 
-const Posts  = lazy(() => import('./Components/Posts'))
+const Posts  = lazy(() => import('./Containers/Posts'))
 
 function App(){
   return (

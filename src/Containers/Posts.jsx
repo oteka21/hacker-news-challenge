@@ -1,22 +1,8 @@
 import React, { Component } from 'react'
 import { fetchMainPosts } from '../utils/api'
-import { Loading } from './Loading'
+import { Loading } from '../Components/Loading'
 import { PropTypes } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { Consumer as ThemeConsumer } from '../Context/Theme'
-
-function Post({title,author,comments, date, url, id}){
-  return (
-    <ThemeConsumer>
-      {({theme}) => (
-        <li className='post'>
-          <h3><a className={`post-title-${theme}`} href={url}>{title}</a></h3>
-          <p className={`post-info-${theme}`}>By <Link to={{pathname:'/user', search:`?id=${author}`}}>{author}</Link> on {date} with <Link  to={{pathname:'/post', search:`?id=${id}`}}>{comments}</Link> comments</p>
-        </li>
-      )}
-    </ThemeConsumer>
-  )
-}
+import { PostItem } from '../Components/PostItem'
 
 
 export default class Posts  extends Component {
@@ -47,7 +33,7 @@ export default class Posts  extends Component {
     return (
       <ul style={{marginTop: 20}}>
         {posts.map(({by, title, url, time, descendants, id}) => 
-          <Post 
+          <PostItem 
           author={by}
           title={title}
           url={url}
