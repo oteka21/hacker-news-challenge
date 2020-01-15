@@ -24,18 +24,35 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx'
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Hacker news',
       inject: false,
       template: require('html-webpack-template'),
-      appMountId: 'app',
-      appMountTag: 'section'
+      appMountId: 'app'
     })
   ],
   devServer: {
     open: true,
     progress: true,
     historyApiFallback: true
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   }
 }

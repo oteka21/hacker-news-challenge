@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { render } from 'react-dom'
-import { Nav } from './Components/Nav.jsx'
+import { Loading } from './Components/Loading'
+import { Nav } from './Components/Nav'
 import { Provider as ThemeProvider } from './Context/Theme.js'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './css/index.css'
+
+const Posts  = lazy(() => import('./Components/Posts'))
 
 function App(){
   return (
@@ -11,6 +14,14 @@ function App(){
       <ThemeProvider>
         <div className='container'>
         <Nav />
+        <Switch>
+          <Suspense fallback={<Loading text='Loading' speed={300} />}>
+            <Route exact path='/' component={() => <Posts type='top' />} />
+            <Route path='/new' component={() => <Posts type='new' />} />
+            <Route path='/post' component={() => null} />
+            <Route path='/user' component={() => null} />
+          </Suspense>
+        </Switch>
         </div>
       </ThemeProvider>
     </Router>

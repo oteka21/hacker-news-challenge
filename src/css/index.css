@@ -17,17 +17,24 @@ button {
   border: 0;
   outline: 0
 }
+html, body, #app {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 50px;
 }
+
 .dark{
   color: #dadada;
   background: #1c2022;
   min-height: 100%;
 }
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -91,4 +98,34 @@ li .nav-link{
 
 .light-btn:disabled{
   background: #292929;
+}
+
+.post {
+  margin: 10px 0;
+}
+
+.post-info-dark{
+  margin-top: 5px; 
+  color: gray;
+}
+.post-info-light{
+  margin-top: 5px; 
+  color: gray;
+}
+.post-info-dark a{
+  color: rgb(203, 203, 203);;
+}
+.post-info-light a{
+  color: #000;
+}
+
+.post-title-light{
+  color: rgb(187, 46, 31);
+  text-decoration: none;
+  font-weight: bold;
+}
+.post-title-dark{
+  color: rgb(202, 202, 202);
+  text-decoration: none;
+  font-weight: bold;
 }
