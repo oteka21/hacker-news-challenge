@@ -21,6 +21,17 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              mimetype: 'image/png'
+            }
+          }
+        ]
       }
     ]
   },
@@ -32,10 +43,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Hacker news',
-      inject: false,
       template: require('html-webpack-template'),
-      appMountId: 'app'
+      inject: false,
+      title: 'Hacker news',
+      appMountId: 'app',
+      links: [
+        {
+          href: './src/assets/apple-icon.png',
+          rel: 'icon',
+          sizes: '32x32',
+          type: 'image/png'
+        }
+      ]
     })
   ],
   devServer: {

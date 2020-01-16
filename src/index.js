@@ -8,6 +8,7 @@ import './css/index.css'
 
 const Posts  = lazy(() => import('./Containers/Posts'))
 const Post  = lazy(() => import('./Containers/Post'))
+const User  = lazy(() => import('./Containers/User'))
 
 function App(){
   return (
@@ -20,7 +21,7 @@ function App(){
             <Route exact path='/' component={() => <Posts type='top' />} />
             <Route path='/new' component={() => <Posts type='new' />} />
             <Route path='/post' component={Post} />
-            <Route path='/user' component={() => null} />
+            <Route path='/user' component={User} />
           </Suspense>
         </Switch>
         </div>
