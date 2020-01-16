@@ -2,10 +2,10 @@ html{
   box-sizing: border-box;
   font-family: system-ui, Helvetica;
 }
-*, *:before, *:after{
+/* *, *:before, *:after{
   box-sizing: inherit;
-}
-ul, li, h1, h2, h3, p, button, body {
+} */
+ul, li, h1, h2, h3, button, body {
   margin: 0;
   padding: 0;
 }
@@ -128,4 +128,11 @@ li .nav-link{
   color: rgb(202, 202, 202);
   text-decoration: none;
   font-weight: bold;
+}
+
+.comment{
+  background: rgba(128, 128, 128, 0.1411764705882353);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
 }

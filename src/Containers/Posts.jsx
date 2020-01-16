@@ -22,7 +22,7 @@ export default class Posts  extends Component {
 
   handleFetch(){
     fetchMainPosts(this.props.type)
-    .then(posts => console.log(posts) || this.setState({posts}))
+    .then(posts => this.setState({posts}))
   }
 
   render(){
