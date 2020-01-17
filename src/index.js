@@ -20,7 +20,7 @@ function App(){
           <Suspense fallback={<Loading text='Loading' speed={300} />}>
             <Route exact path='/' component={() => <Posts type='top' />} />
             <Route path='/new' component={() => <Posts type='new' />} />
-            <Route path='/post' component={Post} />
+            <Route path='/post' component={Post} />} />
             <Route path='/user' component={User} />
           </Suspense>
         </Switch>
