@@ -4,6 +4,7 @@ import { Loading } from './Components/Loading'
 import { Nav } from './Components/Nav'
 import { Provider as ThemeProvider } from './Context/Theme.js'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Consumer as ThemeConsumer } from './Context/Theme'
 import './css/index.css'
 
 const Posts  = lazy(() => import('./Containers/Posts'))
@@ -15,15 +16,18 @@ function App(){
     <Router>
       <ThemeProvider>
         <div className='container'>
-        <Nav />
-        <Switch>
+          <Nav />
           <Suspense fallback={<Loading text='Loading' speed={300} />}>
-            <Route exact path='/' component={() => <Posts type='top' />} />
-            <Route path='/new' component={() => <Posts type='new' />} />
-            <Route path='/post' component={Post} />} />
-            <Route path='/user' component={User} />
+            <Switch>
+                <Route exact path='/' component={() => <Posts type='top' />} />
+                <Route exact path='/new' component={() => <Posts type='new' />} />
+                <Route exact path='/post' component={Post} />
+                <Route path='/user' component={User} />
+                <Route render={() => <ThemeConsumer>
+                  {({theme}) => <h1>404 {theme === 'light' ? '✋🏿' : '✋🏻'}</h1>}
+                </ThemeConsumer>} />
+            </Switch>
           </Suspense>
-        </Switch>
         </div>
       </ThemeProvider>
     </Router>

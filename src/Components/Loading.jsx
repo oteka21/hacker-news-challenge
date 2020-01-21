@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 const styles = {
@@ -12,30 +12,41 @@ const styles = {
   }
 }
 
-export class Loading extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = { content: this.props.text }
-  }
-  componentDidMount () {
-    const { speed, text } = this.props
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
 
-    this.interval = window.setInterval(() => {
-      this.state.content === text + '...'
-        ? this.setState({ content: text })
-        : this.setState(({ content }) => ({ content: content + '.' }))
-    }, speed)
-  }
-  componentWillUnmount () {
-    window.clearInterval(this.interval)
-  }
-  render() {
-    return (
-      <p style={styles.content}>
-        {this.state.content}
-      </p>
-    )
-  }
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+
+export function Loading (props){
+  const [ content, setContent ] = useState(props.text)
+  useInterval(()=>{
+    const { text } = props
+    content === text + '...'
+      ? setContent(text)
+      : setContent(content => content + '.')
+
+  }, props.speed)
+
+  return (
+    <p style={styles.content}>
+      {content}
+    </p>
+  )
 }
 
 Loading.propTypes = {
