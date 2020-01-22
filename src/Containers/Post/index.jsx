@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { Comment } from '../../Components/Comment'
 import { Container, Title } from './styles' 
 import { Info } from '../../styles'
+import moment from 'moment'
 
 function useData(id){
   const [post, setPost] = useState(null)
@@ -40,7 +41,7 @@ export default function Post(props){
     {post && (
     <Container>
       <Title><a href={url}>{title}</a></Title>
-      <Info>By <Link to={{pathname:'/user', search:`?id=${by}`}}>{by}</Link> on {new Date(time).toLocaleString()} with <Link  to={{pathname:'/post', search:`?id=${id}`}}>{descendants}</Link> comments</Info>
+      <Info>By <Link to={{pathname:'/user', search:`?id=${by}`}}>{by}</Link> on {moment.unix(time).format("DD/MM/YYYY hh:mm A")} with <Link  to={{pathname:'/post', search:`?id=${id}`}}>{descendants}</Link> comments</Info>
     </Container>
     )}
     {loadingComments && <Loading text='loading comments' speed={300} />}

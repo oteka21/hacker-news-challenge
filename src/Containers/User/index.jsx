@@ -5,6 +5,7 @@ import { PostItem } from '../../Components/PostItem'
 import { Loading } from '../../Components/Loading'
 import { Title, Info } from '../../styles'
 import { Container } from './styles'
+import moment from 'moment'
 
 function useData(id){
   const [user, setUser] = useState(null)
@@ -41,7 +42,7 @@ export default function User(props){
           {user && (
             <Container>
               <Title>{user.id}</Title>
-              <Info>joined {new Date(user.created).toLocaleString()} has {user.karma.toLocaleString()} karma</Info>
+              <Info>joined {moment.unix(user.created).format("DD/MM/YYYY hh:mm A")} has {user.karma.toLocaleString()} karma</Info>
             </Container>
           )}
           {posts && (
@@ -51,7 +52,7 @@ export default function User(props){
                 author={by}
                 title={title}
                 url={url}
-                date={new Date(time).toLocaleString()}
+                date={moment.unix(time).format("DD/MM/YYYY hh:mm A")}
                 id={id}
                 comments={descendants} 
                 key={id} 

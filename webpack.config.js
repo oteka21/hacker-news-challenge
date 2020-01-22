@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const webpack = require('webpack')
 const path = require('path')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 function isProduction(){
   return process.env.NODE_ENV === 'production'
@@ -54,7 +55,9 @@ module.exports = {
           type: 'image/png'
         }
       ]
-    })
+    }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+    new MomentLocalesPlugin()
   ],
   devServer: {
     open: true,

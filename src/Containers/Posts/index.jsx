@@ -4,6 +4,7 @@ import { Loading } from '../../Components/Loading'
 import { PropTypes } from 'prop-types'
 import { PostItem } from '../../Components/PostItem'
 import styled from 'styled-components'
+import moment from 'moment'
 
 const Container = styled.div`
   margin-top: 20px;
@@ -32,7 +33,7 @@ export default function Posts(props){
         author={by}
         title={title}
         url={url}
-        date={new Date(time).toLocaleString()}
+        date={moment.unix(time).format("DD/MM/YYYY hh:mm A")}
         id={id}
         comments={descendants} 
         key={id} 
