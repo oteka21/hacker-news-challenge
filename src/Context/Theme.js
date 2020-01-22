@@ -1,7 +1,8 @@
 import React, { createContext, useState } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { lightTheme, darkTheme } from '../theme'
 
-
-const Context = createContext({})
+const context = createContext({})
 
 export function Provider ({children}){
   const [ theme, setTheme ] = useState(()=> window.localStorage.getItem('theme') || 'light')
@@ -18,13 +19,13 @@ export function Provider ({children}){
     }
   }
 
-  return <Context.Provider value={value}>
-      <div className={theme}>
+  return <context.Provider value={value}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         {children}
-      </div>
-  </Context.Provider>
+      </ThemeProvider>
+  </context.Provider>
 }
 
-export const Consumer = Context.Consumer
+export const Consumer = context.Consumer
 
-export default Context
+export default context

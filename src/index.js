@@ -5,7 +5,8 @@ import { Nav } from './Components/Nav'
 import { Provider as ThemeProvider } from './Context/Theme.js'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Consumer as ThemeConsumer } from './Context/Theme'
-import './css/index.css'
+import { GlobalStyles } from './styles/globalStyles'
+import { Container } from './styles/index'
 
 const Posts  = lazy(() => import('./Containers/Posts'))
 const Post  = lazy(() => import('./Containers/Post'))
@@ -15,7 +16,8 @@ function App(){
   return (
     <Router>
       <ThemeProvider>
-        <div className='container'>
+        <GlobalStyles />
+        <Container>
           <Nav />
           <Suspense fallback={<Loading text='Loading' speed={300} />}>
             <Switch>
@@ -28,7 +30,7 @@ function App(){
                 </ThemeConsumer>} />
             </Switch>
           </Suspense>
-        </div>
+        </Container>
       </ThemeProvider>
     </Router>
   )

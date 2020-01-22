@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { fetchUser, fetchPosts } from '../utils/api'
+import { fetchUser, fetchPosts } from '../../utils/api'
 import queryString from 'query-string'
-import { PostItem } from '../Components/PostItem'
-import { Consumer as ThemeConsumer } from '../Context/Theme'
-import { Loading } from '../Components/Loading'
+import { PostItem } from '../../Components/PostItem'
+import { Loading } from '../../Components/Loading'
+import { Title, Info } from '../../styles'
+import { Container } from './styles'
 
 function useData(id){
   const [user, setUser] = useState(null)
@@ -34,16 +35,14 @@ export default function User(props){
   const { id: ida } = queryString.parse(props.location.search) 
   const { user, loading, posts, error } = useData(ida)
   return (
-    <ThemeConsumer>
-      {({theme}) => (
         <>
-          {error && <h1 className={`post-title-${theme}`}>There is an error trying to fetch data</h1>}
+          {error && <Title>There is an error trying to fetch data</Title>}
           {loading && <Loading text='Loading Posts' speed={300} />}
           {user && (
-            <div className='post'>
-              <h1 className={`post-title-${theme}`}>{user.id}</h1>
-              <p className={`post-info-${theme}`}>joined {new Date(user.created).toLocaleString()} has {user.karma} karma</p>
-            </div>
+            <Container>
+              <Title>{user.id}</Title>
+              <Info>joined {new Date(user.created).toLocaleString()} has {user.karma.toLocaleString()} karma</Info>
+            </Container>
           )}
           {posts && (
             <ul style={{marginTop: 20}}>
@@ -60,7 +59,5 @@ export default function User(props){
             </ul>
           )}
         </>
-      )}
-    </ThemeConsumer>
-  )
+    )
 }

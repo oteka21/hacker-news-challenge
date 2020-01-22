@@ -2,6 +2,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const path = require('path')
 
+function isProduction(){
+  return process.env.NODE_ENV === 'production'
+}
+
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: path.resolve(__dirname, 'src/index.js'),
@@ -12,10 +16,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
-      },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',

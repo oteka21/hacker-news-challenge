@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { fetchMainPosts } from '../utils/api'
-import { Loading } from '../Components/Loading'
+import { fetchMainPosts } from '../../utils/api'
+import { Loading } from '../../Components/Loading'
 import { PropTypes } from 'prop-types'
-import { PostItem } from '../Components/PostItem'
+import { PostItem } from '../../Components/PostItem'
+import styled from 'styled-components'
 
+const Container = styled.div`
+  margin-top: 20px;
+`
 
 export default function Posts(props){
   const [ posts, setPosts ] = useState(null)
@@ -20,8 +24,9 @@ export default function Posts(props){
   if(!posts){
     return <Loading  text='Loading Posts' speed={300} />
   }
+  
   return (
-    <ul style={{marginTop: 20}}>
+    <Container>
       {posts.map(({by, title, url, time, descendants, id}) => 
         <PostItem 
         author={by}
@@ -32,7 +37,7 @@ export default function Posts(props){
         comments={descendants} 
         key={id} 
         />)}
-    </ul>
+    </Container>
   )
 }
 
