@@ -11,7 +11,7 @@ export function Nav(){
         <li><NavLink className='nav-link' activeStyle={{color: 'rgb(187, 46, 31)'}} to='/new'>New</NavLink></li>
       </NavList>
       <Button
-      onClick={toggleTheme}>
+        onClick={toggleTheme}>
         {theme === 'light' ? '🔦': '💡'}
       </Button>
     </Container>
