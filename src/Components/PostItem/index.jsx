@@ -12,11 +12,8 @@ export function PostItem({title,author,comments, date, url, id}){
         to={{pathname:'/user', search:`?id=${author}`}}
         > {author} </Link>on {date} with 
         <Link  
-        to={{pathname:'/post', search:`?id=${id}`}}>
-          {comments}
-        </Link>
-        comments
-      </Info>
+        to={{pathname:'/post', search:`?id=${id}`}}> {comments}
+        </Link> comments </Info>
     </Container>
   )
 }
