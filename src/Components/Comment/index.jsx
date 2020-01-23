@@ -8,7 +8,7 @@ import moment from 'moment'
 export function Comment({text, by, time }){
   return (
       <Container>
-        <Info>By <Link to={{pathname:'/user', search:`?id=${by}`}}>{by}</Link> on {moment.unix(time).format("DD/MM/YYYY hh:mm A")}</Info>
+        <Info>By <Link to={{pathname:'/user', search:`?id=${by}`}}>{by}</Link> on {moment.unix(time).format("MM/DD/YYYY HH:MM A")}</Info>
         <p dangerouslySetInnerHTML={{__html: text}} ></p>
       </Container>
   )

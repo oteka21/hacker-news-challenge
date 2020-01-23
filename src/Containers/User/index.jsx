@@ -42,22 +42,25 @@ export default function User(props){
           {user && (
             <Container>
               <Title>{user.id}</Title>
-              <Info>joined {moment.unix(user.created).format("DD/MM/YYYY hh:mm A")} has {user.karma.toLocaleString()} karma</Info>
+              <Info>joined {moment.unix(user.created).format("MM/DD/YYYY hh:mm A")} has {user.karma.toLocaleString()} karma</Info>
             </Container>
           )}
           {posts && (
+            <>
+            <Title>Posts</Title>
             <ul style={{marginTop: 20}}>
               {posts.map(({by, title, url, time, descendants, id}) => 
                 <PostItem 
                 author={by}
                 title={title}
                 url={url}
-                date={moment.unix(time).format("DD/MM/YYYY hh:mm A")}
+                date={moment.unix(time).format("MM/DD/YYYY hh:mm A")}
                 id={id}
                 comments={descendants} 
                 key={id} 
                 />)}
             </ul>
+            </>
           )}
         </>
     )

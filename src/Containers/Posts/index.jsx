@@ -33,7 +33,7 @@ export default function Posts(props){
         author={by}
         title={title}
         url={url}
-        date={moment.unix(time).format("DD/MM/YYYY hh:mm A")}
+        date={moment.unix(time).format("MM/DD/YYYY hh:mm A")}
         id={id}
         comments={descendants} 
         key={id} 
