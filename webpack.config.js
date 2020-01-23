@@ -1,10 +1,35 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 
 function isProduction(){
   return process.env.NODE_ENV === 'production'
+}
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: require('html-webpack-template'),
+    inject: false,
+    title: 'Hacker news',
+    appMountId: 'app',
+    links: [
+      {
+        href: './src/assets/apple-icon.png',
+        rel: 'icon',
+        sizes: '32x32',
+        type: 'image/png'
+      }
+    ]
+  })
+]
+
+
+if(isProduction()){
+  plugins.push(
+    new webpack.DllReferencePlugin({
+      manifest: require('./modules-manifest.json')
+    })
+  )
 }
 
 module.exports = {
@@ -41,24 +66,7 @@ module.exports = {
       '.jsx'
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: require('html-webpack-template'),
-      inject: false,
-      title: 'Hacker news',
-      appMountId: 'app',
-      links: [
-        {
-          href: './src/assets/apple-icon.png',
-          rel: 'icon',
-          sizes: '32x32',
-          type: 'image/png'
-        }
-      ]
-    }),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-    new MomentLocalesPlugin()
-  ],
+  plugins,
   devServer: {
     open: true,
     progress: true,
