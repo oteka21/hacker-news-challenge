@@ -8,14 +8,9 @@ export function PostItem({title,author,comments, date, url, id}){
   return (
     <Container>
       <Title><a href={url}>{title}</a></Title>
-      <Info>
-        By 
-        <Link 
+      <Info> By <Link 
         to={{pathname:'/user', search:`?id=${author}`}}
-        >
-          {author}
-        </Link>
-        on {date} with 
+        > {author} </Link>on {date} with 
         <Link  
         to={{pathname:'/post', search:`?id=${id}`}}>
           {comments}
